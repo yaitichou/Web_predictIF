@@ -1,0 +1,204 @@
+/* ----------------------------------------------------------------- */
+/* PANEL STYLES */
+/* ----------------------------------------------------------------- */
+.panelContent {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    color: black;
+    border: solid;
+    border-image: linear-gradient(180deg, #FF8E71 5%, #583D72) 10;
+    border-width: 0px 6px 6px 6px ;
+    background: rgba(0, 0, 0, 0.01);
+}
+.panelHeader {
+    background: #FF8E71;
+    border-radius: 6px 6px 0px 0px;
+    padding: 10px 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Scada';
+}
+.panel {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    margin: 20px;
+}
+.panelContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+/* ----------------------------------------------------------------- */
+/* GRAPH STYLES */
+/* ----------------------------------------------------------------- */
+.graphique {
+    padding: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 6px;
+    border-color: #AAA;
+    margin: 5px;
+    background: white;
+}
+
+/* ----------------------------------------------------------------- */
+/* CONSULTATION ATTRIBUEE */
+/* ----------------------------------------------------------------- */
+#consultationAttribuee {
+    padding: 1.25em 1.5em 2em 1.5em;
+    position: relative;
+}
+.consultationPanel {
+    margin: 15px;
+}
+.consultationPanelHeader {
+    display: flex;
+    flex-direction: row;
+}
+.consultationPanelHeaderLabel {
+    font-size: 26px;
+    font-weight: bold;
+    align-self: center;
+}
+.consultationPanelHeaderLine hr {
+    border-width: 2px;
+    border-color: black;
+    width: 99%;
+}
+.consultationPanelHeaderLine {
+    align-self: center;
+    margin-left: 15px;
+    flex-grow: 2;
+}
+
+#messageConsultation {
+    font-size: 20px;
+    margin: 5px;
+}
+#boutonJeSuisPret {
+    position: absolute;
+    bottom: -1em;
+    right: 1.5em;
+    z-index: 10;
+    padding: 10px 30px;
+    font-size: 26px;
+}
+
+/* ----------------------------------------------------------------- */
+/* CLIENT STYLES */
+/* ----------------------------------------------------------------- */
+.itemClient {
+    margin: 10px 0px;
+    border-radius: 6px;
+    padding: 15px 0px 15px 0px;
+    position: relative;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.16));
+}
+.flexContainerClient {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.clientLeft {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 12em;
+}
+.imageClient {
+    -webkit-filter: drop-shadow(2px 2px 0 black)
+                    drop-shadow(-2px 2px 0 black)
+                    drop-shadow(2px -2px 0 black)
+                    drop-shadow(-2px -2px 0 black);
+    filter: drop-shadow(2px 2px 0 black)
+            drop-shadow(-2px 2px 0 black)
+            drop-shadow(2px -2px 0 black)
+            drop-shadow(-2px -2px 0 black);
+    border-radius: 50%;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+}
+.nomClient {
+    font-size: 26px;
+    font-weight: bold;
+    color: #583D72;
+    line-height: 1.5em;
+}
+.ageClient {
+    font-size: 26px;
+    color: black;
+    line-height: 1.5em;
+}
+.profilAstralClient, .telClient, .lienHistoriqueClient {
+    font-size: 20px;
+    color: black;
+}
+
+/* ----------------------------------------------------------------- */
+/* MEDIUM STYLES */
+/* ----------------------------------------------------------------- */
+.itemMedium {
+    margin: 10px 0px;
+    border-radius: 6px;
+    padding: 15px 0px 15px 0px;
+    position: relative;
+}
+.itemMedium[genre="Homme"] {
+    background: linear-gradient(90deg, rgba(227, 113, 255, 0.3), rgba(116, 113, 255, 0.3));
+}
+.itemMedium[genre="Femme"] {
+    background: linear-gradient(90deg, rgba(255, 222, 48, 0.3), rgba(232, 48, 37, 0.3));
+}
+.flexContainerMedium {
+    display: flex;
+    flex-direction: row;
+}
+.mediumLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 12em;
+}
+.imageMedium {
+    -webkit-filter: drop-shadow(2px 2px 0 black)
+                    drop-shadow(-2px 2px 0 black)
+                    drop-shadow(2px -2px 0 black)
+                    drop-shadow(-2px -2px 0 black);
+    filter: drop-shadow(2px 2px 0 black)
+            drop-shadow(-2px 2px 0 black)
+            drop-shadow(2px -2px 0 black)
+            drop-shadow(-2px -2px 0 black);
+    border-radius: 50%;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+}
+.typeMedium {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 6px grey;
+    font-style: oblique;
+    margin-top: 15px;
+}
+.denominationMedium {
+    font-size: 26px;
+    font-weight: bold;
+    color: #583D72;
+    line-height: 1.5em;
+}
+.presentationMedium {
+    font-size: 20px;
+    color: black;
+}
+.complementMedium {
+    color: #555;
+    font-size: 18px;
+    font-style: oblique;
+}

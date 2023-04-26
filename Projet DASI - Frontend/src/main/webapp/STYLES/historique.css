@@ -1,0 +1,125 @@
+.panelHistorique {
+    padding: 10px 30px;
+    width: 60%;
+}
+#historique {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0px;
+}
+.bienvenue {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 25px;
+    font-family: 'Scada';
+}
+.messageHistorique {
+    font-size: 22px;
+    color: black;
+    margin: 15px 0px;
+}
+
+/* ----------------------------------------------------------------- */
+/* CLIENT STYLES */
+/* ----------------------------------------------------------------- */
+.itemHistoriqueClient {
+    margin: 24px 0px;
+    border-radius: 6px;
+    padding: 50px 0px 0px 0px;
+    position: relative;
+}
+.itemHistoriqueClient[genre="Homme"] {
+    background: linear-gradient(90deg, rgba(227, 113, 255, 0.3), rgba(116, 113, 255, 0.3));
+}
+.itemHistoriqueClient[genre="Femme"] {
+    background: linear-gradient(90deg, rgba(255, 222, 48, 0.3), rgba(232, 48, 37, 0.3));
+}
+.dateHistoriqueClient {
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #583D72;
+    background: #EEE;
+    color: black;
+    font-family: "Scada";
+    font-weight: bold;
+    font-size: 24px;
+    padding: 10px 15px;
+    position: absolute;
+    top: -1em;
+}
+.flexContainerMediumClient {
+    display: flex;
+    flex-direction: row;
+}
+.mediumLeftClient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 0;   
+    flex-shrink: 0;
+    flex-basis: 10em;
+}
+.imageMediumClient {
+    -webkit-filter: drop-shadow(2px 2px 0 black)
+                    drop-shadow(-2px 2px 0 black)
+                    drop-shadow(2px -2px 0 black)
+                    drop-shadow(-2px -2px 0 black);
+    filter: drop-shadow(2px 2px 0 black)
+            drop-shadow(-2px 2px 0 black)
+            drop-shadow(2px -2px 0 black)
+            drop-shadow(-2px -2px 0 black);
+    border-radius: 50%;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+}
+.typeMediumClient {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 6px grey;
+    font-style: oblique;
+    margin: 10px;
+}
+.denominationMediumClient {
+    font-size: 26px;
+    font-weight: bold;
+    color: #583D72;
+}
+.presentationMediumClient {
+    font-size: 20px;
+    color: black;
+}
+.complementMediumClient {
+    color: #555;
+    font-size: 18px;
+    font-style: oblique;
+}
+.boutonRDV {
+    position: absolute;
+    bottom:0;
+    right:0;
+    z-index: 10;
+    padding: 10px 30px;
+    font-size: 22px;
+}
+
+/* ----------------------------------------------------------------- */
+/* EMPLOYE STYLES */
+/* ----------------------------------------------------------------- */
+.itemHistoriqueEmploye {
+    margin: 10px 0px;
+    border-radius: 6px;
+    padding: 15px 20px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+}
+.contenuHistoriqueEmploye {
+    font-size: 22px;
+    margin: 6px 0px;
+}
+.labelHistoriqueEmploye {
+    color: #583D72;
+    font-weight: bold;
+}
+.infoHistoriqueEmploye {
+    color: black;
+}

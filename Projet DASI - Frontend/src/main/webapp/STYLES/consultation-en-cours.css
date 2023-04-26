@@ -1,0 +1,353 @@
+/* ----------------------------------------------------------------- */
+/* PREDICTIONS STYLES */
+/* ----------------------------------------------------------------- */
+#predictionsPanelContent {
+    padding: 10px 30px 60px 30px;
+}
+.predictTitle {
+    color: #583D72;
+    font-weight: bold;
+}
+.responseInput {
+    font-size: 18px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    border-width: 0px;
+    color: black;
+}
+.slidecontainer {
+    width: 50%; 
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.predictionConteneur {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: -10px 0px;
+}
+.predict {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex:50%;
+}
+/* The slider itself */
+.slider {
+    align-content: flex-end;
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 100%; 
+    height: 10px; 
+    border-radius: 6px;
+    background: #d3d3d3;
+    outline: none;
+}
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 12px;
+    height: 25px; 
+    background: #583D72; 
+    cursor: pointer; 
+    border-style: none;
+}
+.slider::-webkit-slider-thumb:hover {
+    opacity: 0.9;
+}
+.slider::-moz-range-thumb {
+    width: 12px; 
+    height: 25px; 
+    background: #583D72; 
+    cursor: pointer; 
+    border-style: none;
+}
+.slider::-moz-range-thumb:hover {
+    opacity: 0.9;
+}
+textarea[disabled] {
+    background: rgba(0, 0, 0, 0.05);
+    margin-top: -10px;
+}
+.amourLabel, santeLabel, travailLabel {
+    font-size: 20px;
+    font-weight: bold;
+}
+#boutonPrediction {
+    position: absolute;
+    bottom: -1em;
+    right: 1.5em;
+    padding: 10px 20px;
+    z-index: 10;
+    font-size: 26px;
+}
+
+/* ----------------------------------------------------------------- */
+/* PAGE STYLES */
+/* ----------------------------------------------------------------- */
+.panelContainer {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    gap: 0em 0.1em;
+    grid-template-areas:
+      "predictions consultation"
+      "historique consultation";
+}
+.consultation { grid-area: consultation; }
+.predictions { grid-area: predictions; }
+.historique { grid-area: historique; }
+
+.panelContent {
+    padding: 5px;
+    color: black;
+    border: solid;
+    border-image: linear-gradient(180deg, #FF8E71 5%, #583D72) 10;
+    border-width: 0px 6px 6px 6px ;
+    background: rgba(0, 0, 0, 0.01);
+    position: relative;
+}
+.panelHeader {
+    background: #FF8E71;
+    border-radius: 6px 6px 0px 0px;
+    padding: 10px 20px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Scada';
+}
+.panel {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+/* ----------------------------------------------------------------- */
+/* CONSULTATION ATTRIBUEE */
+/* ----------------------------------------------------------------- */
+#consultationAttribuee {
+    padding: 1.25em 1.5em 2em 1.5em;
+    position: relative;
+}
+.consultationPanel {
+    margin: 10px;
+}
+.consultationPanelHeader {
+    display: flex;
+    flex-direction: row;
+}
+.consultationPanelHeaderLabel {
+    font-size: 26px;
+    font-weight: bold;
+    align-self: center;
+}
+.consultationPanelHeaderLine hr {
+    border-width: 2px;
+    border-color: black;
+    width: 99%;
+}
+.consultationPanelHeaderLine {
+    align-self: center;
+    margin-left: 15px;
+    flex-grow: 2;
+}
+
+/* ----------------------------------------------------------------- */
+/* CLIENT STYLES */
+/* ----------------------------------------------------------------- */
+.itemClient {
+    margin: 10px 0px;
+    border-radius: 6px;
+    padding: 15px 0px 15px 0px;
+    position: relative;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.16));
+}
+.flexContainerClient {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.clientLeft {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 12em;
+}
+.imageClient {
+    -webkit-filter: drop-shadow(2px 2px 0 black)
+                    drop-shadow(-2px 2px 0 black)
+                    drop-shadow(2px -2px 0 black)
+                    drop-shadow(-2px -2px 0 black);
+    filter: drop-shadow(2px 2px 0 black)
+            drop-shadow(-2px 2px 0 black)
+            drop-shadow(2px -2px 0 black)
+            drop-shadow(-2px -2px 0 black);
+    border-radius: 50%;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+}
+.nomClient {
+    font-size: 26px;
+    font-weight: bold;
+    color: #583D72;
+    line-height: 1.5em;
+}
+.ageClient {
+    font-size: 26px;
+    color: black;
+    line-height: 1.5em;
+}
+.profilAstralClient, .telClient, .lienHistoriqueClient {
+    font-size: 20px;
+    color: black;
+}
+
+/* ----------------------------------------------------------------- */
+/* MEDIUM STYLES */
+/* ----------------------------------------------------------------- */
+.itemMedium {
+    margin: 10px 0px;
+    border-radius: 6px;
+    padding: 15px 0px 15px 0px;
+    position: relative;
+}
+.itemMedium[genre="Homme"] {
+    background: linear-gradient(90deg, rgba(227, 113, 255, 0.3), rgba(116, 113, 255, 0.3));
+}
+.itemMedium[genre="Femme"] {
+    background: linear-gradient(90deg, rgba(255, 222, 48, 0.3), rgba(232, 48, 37, 0.3));
+}
+.flexContainerMedium {
+    display: flex;
+    flex-direction: row;
+}
+.mediumLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 12em;
+}
+.imageMedium {
+    -webkit-filter: drop-shadow(2px 2px 0 black)
+                    drop-shadow(-2px 2px 0 black)
+                    drop-shadow(2px -2px 0 black)
+                    drop-shadow(-2px -2px 0 black);
+    filter: drop-shadow(2px 2px 0 black)
+            drop-shadow(-2px 2px 0 black)
+            drop-shadow(2px -2px 0 black)
+            drop-shadow(-2px -2px 0 black);
+    border-radius: 50%;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+}
+.typeMedium {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 6px grey;
+    font-style: oblique;
+    margin-top: 15px;
+}
+.denominationMedium {
+    font-size: 26px;
+    font-weight: bold;
+    color: #583D72;
+    line-height: 1.5em;
+}
+.presentationMedium {
+    font-size: 20px;
+    color: black;
+
+}
+.complementMedium {
+    color: #555;
+    font-size: 18px;
+    font-style: oblique;
+}
+
+/* ----------------------------------------------------------------- */
+/* COMMENTAIRE STYLES */
+/* ----------------------------------------------------------------- */
+#texteCommentaire {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    margin: 10px 0px;
+    font-size: 18px;
+}
+#saveCommentaire {
+    padding: 5px 15px;
+    float: right;
+}
+#saveCommentaire.clicked {
+    background: #583D72;
+    transition: 1s;
+}
+#tutorialText {
+    margin-top: 3.5em;
+    margin-bottom: 1.5em;
+    font-size: 18px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* ----------------------------------------------------------------- */
+/* ACTION BUTTON STYLES */
+/* ----------------------------------------------------------------- */
+#annuler {
+    position: absolute;
+    bottom: -1em;
+    left: 1.5em;
+    padding: 5px 15px;
+    z-index: 10;
+    font-size: 18px;
+}
+#boutonDemarrer, #boutonArreter, #boutonTerminer {
+    position: absolute;
+    bottom: -1em;
+    right: 1.5em;
+    padding: 10px 20px;
+    z-index: 10;
+    font-size: 26px;
+}
+
+/* ----------------------------------------------------------------- */
+/* HISTORIQUE STYLES */
+/* ----------------------------------------------------------------- */
+#historiquePanelContent {
+    padding: 0px;
+}
+#historique {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 278px; 
+    overflow-y: scroll;
+}
+.itemHistoriqueEmploye {
+    margin: 10px;
+    border-radius: 6px;
+    padding: 10px 15px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+}
+.contenuHistoriqueEmploye {
+    font-size: 18px;
+    margin: 6px 0px;
+}
+.labelHistoriqueEmploye {
+    color: #583D72;
+    font-weight: bold;
+}
+.infoHistoriqueEmploye {
+    color: black;
+}
+.messageHistorique {
+    font-size: 18px;
+    padding: 15px;
+}

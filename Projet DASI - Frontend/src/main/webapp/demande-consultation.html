@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Predicti'if Demander une consultation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="STYLES/main.css">
+        <link rel="stylesheet" href="STYLES/demande-consultation.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body style="display: none;">
+
+        <!-- HEADER / FOOTER -->
+        <div class="header">
+            <a href="index.html" class="logo">Predict'IF</a>
+            <div class="header-right" id='headerContent'>
+                <a href='demande-consultation.html' id='currentPage'>Demander une Consultation</a>
+                <a href='historique.html'>Historique</a>
+                <a href='profil.html'>Profil</a>
+                <a href='#' class='boutonDeconnexion'>Déconnexion</a>
+            </div>
+        </div>
+        <div class="footer"> 
+            <p>© 2021 Predict'IF - Tous droits réservés</p>
+        </div>
+
+        <div class="gridBody">
+
+            <!-- Liste des Mediums -->
+            <div class="gridLeft">       
+                <div class="bienvenue">
+                    <span id="nomClient">Bienvenue, </span><br/>
+                    <span id="sousTitre">Consultez un médium maintenant :</span>
+                </div>
+                <!--
+                <div style="margin: 5px;">
+                    <span style="margin: 5px;">
+                        Filtre:
+                        <select name="listeMedium">
+                            <option value="tous">Tous types</option>
+                            <option value="astrologue">Astrologue</option>
+                            <option value="cartomancien">Cartomancien</option>
+                            <option value="spirite">Spirite</option>
+                        </select>
+                    </span>
+
+                    <span style="margin: 5px;">
+                        <input type="search" placeholder="Chercher par nom..." id="searchName">
+                    </span>
+                </div>
+                -->
+                <div id="listeMediums"></div>
+            </div>
+
+            <!-- Profil Astral -->
+            <div class="gridRight">
+                <div class="profilAstral"> 
+                    <div class="profilAstralHeader"> Votre Profil Astral </div> 
+                    <div class="profilAstralContent">
+                        <div class="profilAstralLabel">
+                            <img src="STYLES/IMAGES/astro-icon.png" width="40"> 
+                            <p>&nbsp;&nbsp;Signe Astrologique</p> 
+                        </div>
+                        <div class="profilAstralEntry" id="signeAstro"> </div>
+                        <div class="profilAstralLabel">
+                            <img src="STYLES/IMAGES/chinese-icon.png" width="40"> 
+                            <p>&nbsp;&nbsp;Signe Zodiaque Chinois</p> 
+                        </div>
+                        <div class="profilAstralEntry" id="signeChinois"> </div>
+                        <div class="profilAstralLabel">
+                            <img src="STYLES/IMAGES/color-icon.png" width="40"> 
+                            <p>&nbsp;&nbsp;Couleur Porte-bonheur</p> 
+                        </div>
+                        <div class="profilAstralEntry" id="couleur"> </div>
+                        <div class="profilAstralLabel">
+                            <img src="STYLES/IMAGES/animal-icon.png" width="40"> 
+                            <p>&nbsp;&nbsp;Animal Totem</p> 
+                        </div>
+                        <div class="profilAstralEntry" id="animalTotem"> </div>
+                        <a href="profil.html" class="hyperlien" id="voirProfilComplet">Voir profil complet</a>
+                    </div> 
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+
+            // INITIALISATION
+            $(document).ready(function () {
+
+                // REDIRIGER VERS UNE AUTRE PAGE SI CE N'EST PAS LE BON USER, REMPLIR PROFIL ASTRAL
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'GET',
+                    data: {
+                        todo: 'obtenirUtilisateurCourant'
+                    },
+                    dataType: 'json'
+                })
+                        .done(function (response) {
+                            // Si l'utilisateur n'est pas loggé ou qu'il n'est pas un client...
+                            if (!(response.utilisateur && response.type === "client")) {
+                                // Rediriger vers l'accueil
+                                window.location.replace("index.html");
+                            }
+                            // Si tout va bien...
+                            else {
+                                // Remplir le profil astral
+                                $('#animalTotem').html("► " + response.animalTotem);
+                                $('#signeAstro').html("► " + response.signeAstro);
+                                $('#couleur').html("► " + response.couleur);
+                                $('#signeChinois').html("► " + response.signeChinois);
+                                // Remplir le message de bienvenue
+                                $('#nomClient').html("Bienvenue, " + response.prenom + ".");
+                                // Afficher la page
+                                $('body').css({"display": "block"});
+                            }
+                        })
+                        .fail(function (error) {
+                            console.log('Error', error);
+                            alert("Erreur obtenirUtilisateurCourant");
+                        });
+
+                // REMPLIR LA LISTE DES MEDIUMS (un seul si consultation demandee, tous sinon)
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'GET',
+                    data: {
+                        todo: 'obtenirConsultationDemandee'
+                    },
+                    dataType: 'json'
+                })
+                        .done(function (response) {
+                            // REMPLIR AVEC LE MEDIUM DEMANDÉ
+                            if (response.consultation) {
+                                $('#sousTitre').html("Votre consultation est en attente. Vous recevrez prochainement un SMS de votre médium.");
+                                var htmlString = "";
+
+                                htmlString += "<div class='itemMedium' genre='" + response.medium.genre + "'>";
+                                htmlString += "<div class='flexContainerMedium'>";
+                                // Image et type
+                                htmlString += "<div class='mediumLeft'>";
+                                htmlString += "<img class='imageMedium' src=\"STYLES/IMAGES/MEDIUMS/" + response.medium.denomination + ".jpg\" width='120'>";
+                                htmlString += "<span class='typeMedium'>" + response.medium.type + "</span>";
+                                htmlString += "</div>";
+                                // Description textuelle
+                                htmlString += "<div class='mediumRight'>";
+                                htmlString += "<span class='denominationMedium'>" + response.medium.denomination + "</span><br/>";
+                                htmlString += "<span class='presentationMedium'>" + response.medium.presentation + "</span><br/>";
+                                switch (response.medium.type) {
+                                    case "Astrologue":
+                                        htmlString += "<span class='complementMedium'><strong>Formation : </strong>" + response.medium.formation + "<br/>";
+                                        htmlString += "<strong>Promotion : </strong>" + response.medium.promotion + "</span>";
+                                        break;
+                                    case "Spirite":
+                                        htmlString += "<span class='complementMedium'><strong>Support :</strong> " + response.medium.support + "</span>";
+                                        break;
+                                }
+                                htmlString += "</div>";
+                                htmlString += "</div>";
+                                // Bouton de RDV
+                                htmlString += "<button id='" + response.medium.id + "' class='boutonRDV'>Prendre RDV &nbsp;&phone;</button>";
+                                htmlString += "</div>";
+                                
+                                $('#listeMediums').html(htmlString);
+                                
+                                // Changer le bouton
+                                var id = response.medium.id;
+                                $('#' + id).html("RDV Pris");
+                                $('#' + id).removeClass("selected");
+                                $('#' + id).addClass("toggled");
+                                $('#' + id).prop('disabled', true);
+                            } 
+                            else {
+                                // REMPLIR LA LISTE DES MEDIUMS
+                                $.ajax({
+                                    url: './ActionServlet',
+                                    method: 'GET',
+                                    data: {
+                                        todo: 'obtenirListeMediums'
+                                    },
+                                    dataType: 'json'
+                                })
+                                        .done(function (response) {
+                                            var htmlString = "";
+                                            for (var id in response.listeMediums) {
+                                                var medium = response.listeMediums[id];
+                                                htmlString += "<div class='itemMedium' genre='" + medium.genre + "'>";
+                                                htmlString += "<div class='flexContainerMedium'>";
+                                                // Image et type
+                                                htmlString += "<div class='mediumLeft'>";
+                                                htmlString += "<img class='imageMedium' src=\"STYLES/IMAGES/MEDIUMS/" + medium.denomination + ".jpg\" width='120'>";
+                                                htmlString += "<span class='typeMedium'>" + medium.type + "</span>";
+                                                htmlString += "</div>";
+                                                // Description textuelle
+                                                htmlString += "<div class='mediumRight'>";
+                                                htmlString += "<span class='denominationMedium'>" + medium.denomination + "</span><br/>";
+                                                htmlString += "<span class='presentationMedium'>" + medium.presentation + "</span><br/>";
+                                                switch (medium.type) {
+                                                    case "Astrologue":
+                                                        htmlString += "<span class='complementMedium'><strong>Formation : </strong>" + medium.formation + "<br/>";
+                                                        htmlString += "<strong>Promotion : </strong>" + medium.promotion + "</span>";
+                                                        break;
+                                                    case "Spirite":
+                                                        htmlString += "<span class='complementMedium'><strong>Support :</strong> " + medium.support + "</span>";
+                                                        break;
+                                                }
+                                                htmlString += "</div>";
+                                                htmlString += "</div>";
+                                                // Bouton de RDV
+                                                htmlString += "<button id='" + medium.id + "' class='boutonRDV'>Prendre RDV &nbsp;&phone;</button>";
+                                                htmlString += "</div>";
+                                            }
+                                            $('#listeMediums').html(htmlString);
+                                        })
+                                        .fail(function (error) {
+                                            console.log('Error', error);
+                                            alert("Erreur obtenirListeMediums");
+                                        });
+                            }
+                        })
+                        .fail(function (error) {
+                            console.log('Error', error);
+                            alert("Erreur obtenirConsultationDemandee");
+                        });
+            });
+
+            // BOUTON DE PRISE DE RDV
+            $('body').on('click', 'button.boutonRDV', function () {
+                var mediumId = $(this).attr('id');
+                var oldText = $('#' + mediumId).html();
+                $('#' + mediumId).html("Demande en cours...");
+                $('#' + mediumId).addClass("selected");
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        todo: 'demanderConsultation',
+                        id: mediumId
+                    },
+                    dataType: 'json'
+                })
+                        .done(function (response) {
+                            console.log(response);
+                            if (response.statut) {
+                                // Alerter l'utilisateur
+                                alert("Le médium vous contactera par téléphone bientôt... Veuillez patienter");
+                                // Changer le bouton
+                                $('#' + mediumId).html("RDV Pris");
+                                $('#' + mediumId).removeClass("selected");
+                                $('#' + mediumId).addClass("toggled");
+                                $('#' + mediumId).prop('disabled', true);
+                                window.location.replace("demande-consultation.html");
+                            } else {
+                                // Alerter l'utilisateur
+                                alert("Le médium demandé n'est pas disponible... Essayez plus tard");
+                                // Changer le bouton
+                                $('#' + mediumId).html(oldText);
+                                $('#' + mediumId).removeClass("selected");
+                            }
+                        })
+                        .fail(function (error) {
+                            console.log('Error', error);
+                            alert("Erreur demanderConsultation");
+                        });
+            });
+
+            // BOUTON DECONNEXION 
+            $('body').on('click', 'a.boutonDeconnexion', function () {
+                if (confirm("Êtes-vous sûrs de vouloir vous déconnecter ?")) {
+                    $.ajax({
+                        url: './ActionServlet',
+                        method: 'POST',
+                        data: {
+                            todo: 'demandeDeconnexion'
+                        },
+                        dataType: 'json'
+                    })
+                            .done(function () {
+                                window.location.replace("index.html");
+                            })
+                            .fail(function (error) {
+                                console.log('Error', error);
+                                alert("Nous n'avons pas pu vous déconnecter.");
+                            });
+                }
+            });
+
+        </script>
+    </body>
+</html>
